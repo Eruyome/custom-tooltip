@@ -1,0 +1,52 @@
+<h2>Search Result Table</h2>
+
+<ng-container *ngFor="let element of elements">
+    <!-- tables -->
+    <ng-container *ngIf="element.elementType=='table'">
+        <table class="table font_def {{element.gridType}}" [ngClass]="{'hideGrid': element.showGrid!=1}" [ngStyle]="{'border-color': '#' + element.fColor}">
+            <tr *ngFor="let row of element.rows" class="row">
+                <td *ngFor="let cell of row" class="cell" [ngClass]="{'bold': cell.fontOptions=='bold', 'isPrice': cell.isPrice==1}" [ngStyle]="{'text-align': cell.alignment, 'color': cell.color.length ? '#' + cell.color : '#' + element.fColor, 'background-color': cell.bgColor.length ? '#' + cell.bgColor : 'transparent'}">
+                    <ng-container *ngIf="cell.isPrice==1; else nonPrice">
+                        <span class="price-num">13</span>
+                        <span class="price-decimal">.5</span>
+                        <span class="price-currency">exalted</span>
+                    </ng-container>
+                    <ng-template #nonPrice>
+                        <span>{{ cell.value }}</span>
+                    </ng-template>
+                </td>
+            </tr>
+        </table>
+    </ng-container>
+    
+    <!-- grid lists -->
+    <ng-container *ngIf="element.elementType=='gridList'">
+        <div class="gridList font_def {{element.gridType}}" [ngClass]="{'hideGrid': element.showGrid!=1}">            
+            <div *ngFor="let cell of element.cells" class="grid-cell" [ngClass]="{'bold': cell.fontOptions=='bold', 'header': cell.isHeader}" [ngStyle]="{'text-align': cell.alignment, 'color': cell.color.length ? '#' + cell.color : '#' + element.fColor}">
+                <span>{{ cell.value }}</span>
+            </div>            
+        </div>
+    </ng-container>
+    
+    <!-- lists -->
+    <ng-container *ngIf="element.elementType=='list'">
+        <ul class="list font_def">
+            <li *ngFor="let cell of element.cells" class="list-entry" [ngClass]="{'bold': cell.fontOptions=='bold', 'header': cell.isHeader}" [ngStyle]="{'text-align': cell.alignment, 'color': cell.color.length ? '#' + cell.color : '#' + element.fColor}">
+                <span>{{ cell.value }}</span>
+            </li>           
+        </ul> 
+    </ng-container>
+
+    <!-- lines / paragraphs -->
+    <ng-container *ngIf="element.elementType=='paragraph'">
+        <p class="paragraph" [ngClass]="{'bold': element.fontOptions=='bold'}" [ngStyle]="{'text-align': element.alignment, 'color': element.text.color.length ? element.text.color : '#' + element.fColor}">
+            {{ element.text.value }}
+        </p>
+    </ng-container>
+</ng-container>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
