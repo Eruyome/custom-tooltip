@@ -19,7 +19,7 @@ body {
   background-color: #252323;
 }
 
-router-outlet + *  {
+app-price-table {
   padding: 0 16px;  
 }
 
