@@ -1,14 +1,14 @@
 
-<ng-container *ngFor="let element of elements">
+<ng-container *ngFor="let element of elementList">
     <!-- tables -->
     <ng-container *ngIf="element.elementType=='table'">
         <table class="table font_def {{element.gridType}}" [ngClass]="{'hideGrid': element.showGrid!=1}" [ngStyle]="{'border-color': '#' + element.fColor}">
             <tr *ngFor="let row of element.rows" class="row">
                 <td *ngFor="let cell of row" class="cell" [ngClass]="{'bold': cell.fontOptions=='bold', 'isPrice': cell.isPrice==1}" [ngStyle]="{'text-align': cell.alignment, 'color': cell.color.length ? '#' + cell.color : '#' + element.fColor, 'background-color': cell.bgColor.length ? '#' + cell.bgColor : 'transparent'}">
                     <ng-container *ngIf="cell.isPrice==1; else nonPrice">
-                        <span class="price-num">13</span>
-                        <span class="price-decimal">.5</span>
-                        <span class="price-currency">exalted</span>
+                        <span class="price-num"></span>
+                        <span class="price-decimal"></span>
+                        <span class="price-currency"></span>
                     </ng-container>
                     <ng-template #nonPrice>
                         <span>{{ cell.value }}</span>
